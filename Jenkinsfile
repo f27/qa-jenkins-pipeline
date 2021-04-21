@@ -8,7 +8,7 @@ pipeline {
             steps {
                   withGradle {
                     withCredentials([string(credentialsId: 'c05-fattaft-telegram-token', variable: 'SECRET')]) {
-                        sh '--version'
+                        sh 'clean test'
                     }
                   }
             }
