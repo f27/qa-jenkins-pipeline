@@ -7,7 +7,9 @@ pipeline {
         stage('Test') {
             steps {
                   withGradle {
-                    sh "echo ${SECRET}"
+                    withCredentials([string(credentialsId: 'c05-fattaft-telegram-token', variable: 'SECRET')]) {
+                        sh 'echo "${SECRET}"'
+                    }
                   }
             }
         }
