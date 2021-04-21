@@ -10,7 +10,7 @@ pipeline {
         string(name: 'THREADS', defaultValue: '1')
         choice(name: 'ENV_URL', choices: ['https://ya.ru', 'http://PREPROD.url'])
         string(name: 'TELEGRAM_CHAT_ID', defaultValue: '-548005165')
-        credentials(name: 'TELEGRAM_BOT_TOKEN',
+        credentials(name: 'TELEGRAM_BOT_TOKEN_ID',
                 description: 'Telegram bot token for sending notifications in telegram chat',
                 defaultValue: 'c05-fattaft-telegram-token',
                 credentialType: "jenkins_secret_text_credentials",
@@ -19,7 +19,9 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh './gradlew clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
+                withCredentials([string(credentialsId: TELEGRAM_BOT_TOKEN_ID, variable: 'TELEGRAM_BOT_TOKEN')]) {
+                    sh './gradlew clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
+                }
             }
         }
     }
