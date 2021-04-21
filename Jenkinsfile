@@ -7,7 +7,7 @@ pipeline {
         stage('Test') {
             steps {
                   withGradle {
-                    sh 'gradle --version'
+                    sh "echo ${CHOICE_BOOLEAN}"
                   }
             }
         }
