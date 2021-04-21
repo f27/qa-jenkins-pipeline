@@ -34,8 +34,11 @@ pipeline {
 
     post {
         always {
+            allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
+        }
+        always {
             withCredentials([string(credentialsId: '${TELEGRAM_BOT_TOKEN_ID}', variable: 'TELEGRAM_BOT_TOKEN')]) {
-                sh "[ ! -f ${allureFile} ] && wget -O ${allureFile} ${allureNotificationsUrl}"
+                sh "if [ ! -f ${allureFile} ]; then wget -O ${allureFile} ${allureNotificationsUrl} fi"
                 sh 'java' +
                         '  "-Dmessenger=telegram"' +
                         ' "-Dchat.id=${TELEGRAM_CHAT_ID}"' +
@@ -49,9 +52,7 @@ pipeline {
                         ' "-Dallure.report.folder=./allure-report/"' +
                         ' -jar ' + $allureFile
             }
-            allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
         }
     }
-
 }
 
