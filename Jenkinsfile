@@ -4,7 +4,7 @@ parameters { choice(name: 'CHOICES', choices: ['one', 'two', 'three'], descripti
 pipeline {
     agent any
     environment {
-        CHOICE_BOOLEAN = ${CHOICE_BOOLEAN}
+        CHOICE_BOOLEAN = ${CHOICES}
     }
 
     stages {
