@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         choice(name: 'TASK',
-                choices: ['test', 'api', 'selenide'],
+                choices: ['test', 'selenide', 'jsoup'],
                 description: 'test - run all tests\n' +
                         'selenide - run tests with selenide\n' +
                         'jsoup - run tests with jsoup parser')
@@ -12,8 +12,8 @@ pipeline {
         string(name: 'TELEGRAM_CHAT_ID', defaultValue: '-548005165')
         credentials(name: 'TELEGRAM_BOT_TOKEN',
                 description: 'Telegram bot token for sending notifications in telegram chat',
-                defaultValue: 'c05-fattaft-Telegram_token',
-                credentialType: "Secret text",
+                defaultValue: '',
+                credentialType: "jenkins_secret_text_credentials",
                 required: true )
     }
     stages {
