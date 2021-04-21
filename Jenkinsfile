@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    options([pipelineTriggers([githubPush()])])
+    properties([pipelineTriggers([githubPush()])])
     environment {
         CHOICE_BOOLEAN = true
         TELEGRAM_TOKEN = credentials('c05-fattaft-Telegram_token')
