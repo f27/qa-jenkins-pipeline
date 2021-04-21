@@ -9,17 +9,11 @@ pipeline {
                 sh './gradlew clean test'
             }
         }
-
-        stage('Allure reports') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
-            }
+    }
+    post {
+        always {
+            allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
         }
     }
 }
 
-post {
-    always {
-        deleteDir()
-    }
-}
