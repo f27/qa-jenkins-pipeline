@@ -1,4 +1,4 @@
-options {
+properties {
     parameters {
         choice(name: 'TASK',
                 choices: ['test', 'selenide', 'jsoup'],
