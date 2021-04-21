@@ -19,8 +19,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'username=' + TELEGRAM_BOT_TOKEN + 'password=' + TELEGRAM_BOT_TOKEN
-                sh './gradlew clean test -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
+                sh './gradlew clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
             }
         }
     }
