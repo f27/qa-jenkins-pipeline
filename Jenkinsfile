@@ -6,18 +6,14 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                  withGradle {
-                    withCredentials([string(credentialsId: 'c05-fattaft-telegram-token', variable: 'SECRET')]) {
-                        sh './gradlew clean test'
-                    }
-                  }
+                sh './gradlew clean test'
             }
         }
     }
+}
 
-    post {
-       always {
-           cleanWs()
-       }
-   }
+post {
+    always {
+        allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
+    }
 }
