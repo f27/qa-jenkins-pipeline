@@ -30,9 +30,10 @@ pipeline {
                 }
             }
         }
-        stage('Test Java') {
+        stage('Allure-notifications') {
             steps {
-                sh "[ ! -f allure-notifications.jar ] && wget -O 'allure-notifications.jar' ${allureNotificationsUrl}"
+                sh '[ ! -f ${allureFile} ] && wget -O ${allureFile} ${allureNotificationsUrl}'
+                sh
             }
         }
     }
