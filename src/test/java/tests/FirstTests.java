@@ -8,7 +8,6 @@ public class FirstTests {
 
     @Test
     void simpleTest() {
-
         assertThat(true).isEqualTo(true);
     }
 }
