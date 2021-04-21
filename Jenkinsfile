@@ -1,3 +1,6 @@
+def allureFile = 'allure-notifications.jar'
+def allureNotificationsUrl = 'https://github.com/qa-guru/allure-notifications/releases/download/fr/allure-notifications-2.2.3.jar'
+
 pipeline {
     agent any
     tools {
@@ -29,8 +32,6 @@ pipeline {
         }
         stage('Test Java') {
             steps {
-                def allureNotificationsUrl = 'https://github.com/qa-guru/allure-notifications/releases/download/fr/allure-notifications-2.2.3.jar'
-
                 sh "[ ! -f allure-notifications.jar ] && wget -O 'allure-notifications.jar' ${allureNotificationsUrl}"
             }
         }
