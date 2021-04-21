@@ -19,11 +19,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                withCredentials([string(credentialsId: 'c05-fattaft-Telegram_token', variable: 'TELEGRAM_BOT_TOKEN')]) {
-                    sh 'echo ${TASK} ${TELEGRAM_BOT_TOKEN}'
-                    sh './gradlew clean test -Dtelegram.token=${TELEGRAM_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
-                }
                 sh 'echo ${TASK} ${TELEGRAM_BOT_TOKEN}'
+                sh './gradlew clean test -Dtelegram.token=${TELEGRAM_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
             }
         }
     }
