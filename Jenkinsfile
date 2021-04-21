@@ -15,13 +15,6 @@ pipeline {
                 defaultValue: 'c05-fattaft-Telegram_token',
                 credentialType: "Secret text",
                 required: true )
-
-        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-
-        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
-
-
-        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
     stages {
         stage('Test') {
