@@ -12,7 +12,7 @@ pipeline {
         stage('Test') {
             steps {
                   withGradle {
-                    sh 'gradle --version'v
+                    sh './gradlew --version'
                   }
             }
         }
