@@ -4,9 +4,7 @@ pipeline {
         CHOICE_BOOLEAN = true
         TELEGRAM_TOKEN = credentials('c05-fattaft-Telegram_token')
     }
-
     stages {
-
         stage('Test') {
             steps {
                 sh 'echo ${CHOICE_BOOLEAN} ${TELEGRAM_TOKEN}'
