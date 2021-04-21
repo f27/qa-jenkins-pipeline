@@ -1,5 +1,6 @@
 def allureFile = 'allure-notifications.jar'
 def allureNotificationsUrl = 'https://github.com/qa-guru/allure-notifications/releases/download/fr/allure-notifications-2.2.3.jar'
+def allureTestOpsProjectId = '164'
 
 pipeline {
     agent any
@@ -25,7 +26,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: '164', results: [[path: 'build/allure-results']], serverId: 'allure-server', tags: 'tags') {
+                withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: allureTestOpsProjectId, results: [[path: 'build/allure-results']], serverId: 'allure-server', tags: 'tags') {
                     sh 'gradle clean ${TASK} -Dthreads=${THREADS}'
                 }
             }
