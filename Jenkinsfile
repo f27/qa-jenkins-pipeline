@@ -33,7 +33,7 @@ pipeline {
         stage('Allure-notifications') {
             steps {
                 withCredentials([string(credentialsId: '${TELEGRAM_BOT_TOKEN_ID}', variable: 'TELEGRAM_BOT_TOKEN')]) {
-                    sh '[ ! -f ${allureFile} ] && wget -O ${allureFile} ${allureNotificationsUrl}'
+                    sh "[ ! -f ${allureFile} ] && wget -O ${allureFile} ${allureNotificationsUrl}"
                     sh 'java' +
                             '  "-Dmessenger=telegram"' +
                             ' "-Dchat.id=${TELEGRAM_CHAT_ID}"' +
@@ -45,7 +45,7 @@ pipeline {
                             ' "-Dlang=ru"' +
                             ' "-Denable.chart=true"' +
                             ' "-Dallure.report.folder=./allure-report/"' +
-                            ' -jar ${allureFile}'
+                            ' -jar ' + ${allureFile}
                 }
             }
         }
