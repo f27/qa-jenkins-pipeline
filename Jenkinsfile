@@ -19,8 +19,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh('echo ${TASK} ${params.TELEGRAM_BOT_TOKEN}')
-                sh('./gradlew clean test -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}')
+                sh 'echo ${TASK} ${params.TELEGRAM_BOT_TOKEN}'
+                sh './gradlew clean test -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
             }
         }
     }
