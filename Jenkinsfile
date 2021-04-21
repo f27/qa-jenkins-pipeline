@@ -27,8 +27,6 @@ pipeline {
                 }
             }
         }
-    }
-    stages {
         stage('Test gradle') {
             steps {
                 withGradle {
@@ -37,6 +35,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
