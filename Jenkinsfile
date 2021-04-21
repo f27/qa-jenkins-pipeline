@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                withCredentials([string(credentialsId: TELEGRAM_BOT_TOKEN_ID, variable: 'TELEGRAM_BOT_TOKEN')]) {
+                withCredentials([string(credentialsId: '${TELEGRAM_BOT_TOKEN_ID}', variable: 'TELEGRAM_BOT_TOKEN')]) {
                     sh './gradlew clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
                 }
             }
