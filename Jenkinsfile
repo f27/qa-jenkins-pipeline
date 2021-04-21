@@ -4,24 +4,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Test') {
-            steps {
-                sh './gradlew clean test'
+        try {
+            stage('Test') {
+                steps {
+                    sh './gradlew clean test'
+                }
+            }
+        } finally {
+
+            stage('Allure reports') {
+                steps {
+                    allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
+                }
             }
         }
-
     }
 }
 
 post {
     always {
-        allure([
-                includeProperties: true,
-                jdk              : '',
-                properties       : [],
-                reportBuildPolicy: 'ALWAYS',
-                results          : [[path: 'ui-tests/build/allure-results']]
-            ])
         deleteDir()
     }
 }
