@@ -1,17 +1,16 @@
-properties([pipelineTriggers([githubPush()])])
-parameters { choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '') }
-
 pipeline {
     agent any
     environment {
-        CHOICE_BOOLEAN = ${CHOICES}
+        CHOICE_BOOLEAN = true
+        TELEGRAM_TOKEN = credentials('c05-fattaft-Telegram_token')
     }
 
     stages {
 
         stage('Test') {
             steps {
-                sh './gradlew clean test'
+                sh 'echo ${CHOICE_BOOLEAN} ${TELEGRAM_TOKEN}'
+                sh './gradlew clean test -Dtelegram.token=${TELEGRAM_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
             }
         }
     }

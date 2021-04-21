@@ -8,6 +8,7 @@ public class FirstTests {
 
     @Test
     void simpleTest() {
+        System.out.println(System.getProperties());
 
         assertThat(true).isEqualTo(true);
     }
