@@ -35,8 +35,6 @@ pipeline {
     post {
         always {
             allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
-        }
-        always {
             withCredentials([string(credentialsId: '${TELEGRAM_BOT_TOKEN_ID}', variable: 'TELEGRAM_BOT_TOKEN')]) {
                 sh "if [ ! -f ${allureFile} ]; then wget -O ${allureFile} ${allureNotificationsUrl} fi"
                 sh 'java' +
