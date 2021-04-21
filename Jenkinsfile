@@ -7,7 +7,7 @@ pipeline {
         stage('Test') {
             steps {
                   withGradle {
-                    sh "echo ${CHOICE_BOOLEAN} "
+                    sh "echo ${SECRET}"
                   }
             }
         }
