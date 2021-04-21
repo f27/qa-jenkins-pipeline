@@ -32,20 +32,22 @@ pipeline {
         }
         stage('Allure-notifications') {
             steps {
-                sh '[ ! -f ${allureFile} ] && wget -O ${allureFile} ${allureNotificationsUrl}'
                 withCredentials([string(credentialsId: '${TELEGRAM_BOT_TOKEN_ID}', variable: 'TELEGRAM_BOT_TOKEN')]) {
-                    sh 'java' +
-                            '  "-Dmessenger=telegram"' +
-                            ' "-Dchat.id=${TELEGRAM_CHAT_ID}"' +
-                            ' "-Dbot.token=${TELEGRAM_BOT_TOKEN}"' +
-                            ' "-Dbuild.launch.name=${JOB_NAME} - #${BUILD_NUMBER}"' +
-                            ' "-Dbuild.env=${ENV_URL}"' +
-                            ' "-Dbuild.report.link=${BUILD_URL}"' +
-                            ' "-Dproject.name=${JOB_BASE_NAME}"' +
-                            ' "-Dlang=ru"' +
-                            ' "-Denable.chart=true"' +
-                            ' "-Dallure.report.folder=./allure-report/"' +
-                            ' -jar ${allureFile}'
+                    step { sh '[ ! -f ${allureFile} ] && wget -O ${allureFile} ${allureNotificationsUrl}' }
+                    step {
+                        sh 'java' +
+                                '  "-Dmessenger=telegram"' +
+                                ' "-Dchat.id=${TELEGRAM_CHAT_ID}"' +
+                                ' "-Dbot.token=${TELEGRAM_BOT_TOKEN}"' +
+                                ' "-Dbuild.launch.name=${JOB_NAME} - #${BUILD_NUMBER}"' +
+                                ' "-Dbuild.env=${ENV_URL}"' +
+                                ' "-Dbuild.report.link=${BUILD_URL}"' +
+                                ' "-Dproject.name=${JOB_BASE_NAME}"' +
+                                ' "-Dlang=ru"' +
+                                ' "-Denable.chart=true"' +
+                                ' "-Dallure.report.folder=./allure-report/"' +
+                                ' -jar ${allureFile}'
+                    }
                 }
             }
         }
