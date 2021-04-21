@@ -12,6 +12,13 @@ public class FirstTests {
         parameter("tkn", System.getProperty("telegram.token"));
 
         assertThat(System.getProperty("threads")).isEqualTo("1");
-        assertThat(System.getProperty("telegram.token")).isNotEqualTo("c05-fattaft-telegram-token");
+        assertThat(System.getProperty("telegram.token")).isNotEmpty();
+    }
+
+    @Test
+    void anotherSimpleTest() {
+
+        assertThat(true).isEqualTo(true);
+        assertThat(false).isNotEqualTo(true);
     }
 }
