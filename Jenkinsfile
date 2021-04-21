@@ -37,18 +37,18 @@ pipeline {
             allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
             withCredentials([string(credentialsId: '${TELEGRAM_BOT_TOKEN_ID}', variable: 'TELEGRAM_BOT_TOKEN')]) {
                 sh "if [ ! -f '${allureFile}' ]; then wget -O '${allureFile}' '${allureNotificationsUrl}'; fi"
-                sh 'java' +
-                        '  "-Dmessenger=telegram"' +
-                        ' "-Dchat.id=${TELEGRAM_CHAT_ID}"' +
-                        ' "-Dbot.token=${TELEGRAM_BOT_TOKEN}"' +
-                        ' "-Dbuild.launch.name=${JOB_NAME} - #${BUILD_NUMBER}"' +
-                        ' "-Dbuild.env=${ENV_URL}"' +
-                        ' "-Dbuild.report.link=${BUILD_URL}"' +
-                        ' "-Dproject.name=${JOB_BASE_NAME}"' +
-                        ' "-Dlang=ru"' +
-                        ' "-Denable.chart=true"' +
-                        ' "-Dallure.report.folder=./allure-report/"' +
-                        ' -jar ' + ${allureFile}
+                sh "java" +
+                        "  '-Dmessenger=telegram'" +
+                        " '-Dchat.id=${TELEGRAM_CHAT_ID}'" +
+                        " '-Dbot.token=${TELEGRAM_BOT_TOKEN}'" +
+                        " '-Dbuild.launch.name=${JOB_NAME} - #${BUILD_NUMBER}'" +
+                        " '-Dbuild.env=${ENV_URL}'" +
+                        " '-Dbuild.report.link=${BUILD_URL}'" +
+                        " '-Dproject.name=${JOB_BASE_NAME}'" +
+                        " '-Dlang=ru'" +
+                        " '-Denable.chart=true'" +
+                        " '-Dallure.report.folder=./allure-report/'" +
+                        " ' -jar ${allureFile}"
             }
         }
     }
