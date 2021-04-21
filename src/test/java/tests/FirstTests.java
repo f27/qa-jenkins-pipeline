@@ -11,7 +11,7 @@ public class FirstTests {
     void simpleTest() {
         parameter("tkn", System.getProperty("telegram.token"));
 
-        assertThat(System.getProperty("threads")).isEqualTo("1");
+        assertThat(System.getProperty("threads")).isEqualTo("2");
     }
 
     @Test
