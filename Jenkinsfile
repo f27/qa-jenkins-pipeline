@@ -2,9 +2,6 @@ properties([pipelineTriggers([githubPush()])])
 
 pipeline {
     agent any
-    tools {
-        gradle "6.8.3"
-    }
 
     stages {
         stage('Checkout SCM') {
@@ -23,7 +20,7 @@ pipeline {
 
     post {
        always {
-           deleteDir()
+           cleanWs()
        }
    }
 }
