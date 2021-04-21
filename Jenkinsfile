@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                print 'username=' + TELEGRAM_BOT_TOKEN + 'password=' + TELEGRAM_BOT_TOKEN.collect
+                sh 'username=' + TELEGRAM_BOT_TOKEN + 'password=' + TELEGRAM_BOT_TOKEN.collect
                 sh './gradlew clean test -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
             }
         }
