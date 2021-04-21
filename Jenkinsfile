@@ -10,7 +10,7 @@ pipeline {
                         'selenide - run tests with selenide\n' +
                         'jsoup - run tests with jsoup parser')
         string(name: 'SELENOID_URL', defaultValue: 'selenoid.autotests.cloud')
-        string(name: 'THREADS', defaultValue: '1')
+        string(name: 'THREADS', defaultValue: '2')
         choice(name: 'ENV_URL', choices: ['https://ya.ru', 'http://PREPROD.url'])
         string(name: 'TELEGRAM_CHAT_ID', defaultValue: '-548005165')
         credentials(name: 'TELEGRAM_BOT_TOKEN_ID',
@@ -23,15 +23,13 @@ pipeline {
         stage('Test') {
             steps {
                 withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: '164', results: [[path: 'build/allure-results']], serverId: 'allure-server', tags: 'tags') {
-                    sh './gradlew clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
+                    sh 'gradle clean ${TASK} -Dthreads=${THREADS}'
                 }
             }
         }
         stage('Test gradle') {
             steps {
-                withGradle {
-                    sh 'gradle clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
-                }
+                sh 'gradle clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
             }
         }
     }
