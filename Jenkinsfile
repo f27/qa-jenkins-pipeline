@@ -12,8 +12,7 @@ pipeline {
         string(name: 'TELEGRAM_CHAT_ID', defaultValue: '-548005165')
         credentials(name: 'TELEGRAM_BOT_TOKEN',
                 description: 'Telegram bot token for sending notifications in telegram chat',
-                credentialsId: 'co5-fattaft-Telegram_token',
-                defaultValue: '',
+                defaultValue: 'c05-fattaft-Telegram_token',
                 credentialType: "Secret text",
                 required: true )
 
