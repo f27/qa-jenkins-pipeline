@@ -27,9 +27,9 @@ pipeline {
                 }
             }
         }
-        stage('Test gradle') {
+        stage('Test Java') {
             steps {
-                sh 'gradle clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
+                sh 'java -v'
             }
         }
     }
