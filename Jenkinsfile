@@ -15,7 +15,13 @@ pipeline {
 
 post {
     always {
-        allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
+        allure([
+                includeProperties: true,
+                jdk              : '',
+                properties       : [],
+                reportBuildPolicy: 'ALWAYS',
+                results          : [[path: 'ui-tests/build/allure-results']]
+            ])
         deleteDir()
     }
 }
