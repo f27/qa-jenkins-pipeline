@@ -1,5 +1,4 @@
-pipeline {
-    agent any
+options {
     parameters {
         choice(name: 'TASK',
                 choices: ['test', 'selenide', 'jsoup'],
@@ -16,6 +15,9 @@ pipeline {
                 credentialType: "jenkins_secret_text_credentials",
                 required: true)
     }
+}
+pipeline {
+    agent any
     stages {
         stage('Test') {
             steps {
