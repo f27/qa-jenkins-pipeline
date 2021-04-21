@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        gradle "Gradle 6.8.3"
+    }
     parameters {
         choice(name: 'TASK',
                 choices: ['test', 'selenide', 'jsoup'],
@@ -19,8 +22,17 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                withCredentials([string(credentialsId: '${TELEGRAM_BOT_TOKEN_ID}', variable: 'TELEGRAM_BOT_TOKEN')]) {
+                withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: '164', results: [[path: 'build/allure-results']], serverId: 'allure-server', tags: 'tags') {
                     sh './gradlew clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
+                }
+            }
+        }
+    }
+    stages {
+        stage('Test gradle') {
+            steps {
+                withGradle {
+                    sh 'gradle clean ${TASK} -Dtelegram.token=${TELEGRAM_BOT_TOKEN} -Dthreads=${THREADS}'
                 }
             }
         }
