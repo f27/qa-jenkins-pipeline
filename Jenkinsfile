@@ -14,13 +14,15 @@ pipeline {
                 description: 'Telegram bot token for sending notifications in telegram chat',
                 defaultValue: '',
                 credentialType: "jenkins_secret_text_credentials",
-                required: true )
+                required: true)
     }
     stages {
         stage('Test') {
             steps {
-                sh 'echo ${TASK} ${TELEGRAM_BOT_TOKEN}'
-                sh './gradlew clean test -Dtelegram.token=${TELEGRAM_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
+                withCredentials([string(credentialsId: 'c05-fattaft-telegram-token', variable: 'TELEGRAM_BOT_TOKEN')]) {
+                    sh 'echo ${TASK} ${TELEGRAM_BOT_TOKEN}'
+                    sh './gradlew clean test -Dtelegram.token=${TELEGRAM_TOKEN} -Dpar.boolean=${CHOICE_BOOLEAN}'
+                }
             }
         }
     }
