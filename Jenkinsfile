@@ -48,7 +48,7 @@ pipeline {
                         ' "-Dlang=ru"' +
                         ' "-Denable.chart=true"' +
                         ' "-Dallure.report.folder=./allure-report/"' +
-                        ' -jar ' + $allureFile
+                        ' -jar ' + ${allureFile}
             }
         }
     }
